@@ -1,10 +1,11 @@
 import React from 'react';
 
-const project = (props) =>{
+const person = (props) =>{
+    console.log(props)
 return (
 <div>
-    <h3>I am {props.name} and i am {props.age}</h3>
-    <h3>{props.children}</h3>
+    <p>I am {props.name} and i am {props.age}</p>
+    <p>{props.children}</p>
 </div>)
 }
-export default project;
+export default person;
