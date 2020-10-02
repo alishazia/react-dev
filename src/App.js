@@ -8,7 +8,8 @@ class App extends Component {
       { name: "shazia", age: "24" },
       { name: "ali", age: "25" },
       { name: "najar", age: "26" },
-    ]
+    ],
+    showPersons: false
   }
   switchNameHandler = (newName) => {
     // we should directly change the state here
@@ -21,6 +22,12 @@ class App extends Component {
         { name: "ali", age: "25" },
         { name: "najar", age: "27" },
       ]
+    })
+  }
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow
     })
   }
 
@@ -37,12 +44,18 @@ class App extends Component {
     return (
       <div className="App">
         <p>Hello, Lets start working in React!!</p>
+
         {/* here we called the bind and passed the reference */}
-        <button onClick={this.switchNameHandler.bind(this, 'Maximillian!!!!!!!!')}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        {/* here we have used arrow function and it will be executed on the click of the event and it not executing the function here */}
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={()=> {this.switchNameHandler('Maximillian')}} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        <button onClick={this.togglePersonsHandler}>Toggle Person</button>
+        { this.state.showPersons ?
+          <div>
+            <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+
+            {/* here we have used arrow function and it will be executed on the click of the event and it not executing the function here */}
+            <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={() => { this.switchNameHandler('Maximillian') }} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
+            <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+          </div>
+          : null}
       </div>
     );
   }
