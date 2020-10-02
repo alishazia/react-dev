@@ -41,13 +41,9 @@ class App extends Component {
     })
   }
   render() {
-    return (
-      <div className="App">
-        <p>Hello, Lets start working in React!!</p>
-
-        {/* here we called the bind and passed the reference */}
-        <button onClick={this.togglePersonsHandler}>Toggle Person</button>
-        { this.state.showPersons ?
+    let Persons = null;
+    if (this.state.showPersons){
+      Persons = (
           <div>
             <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
 
@@ -55,7 +51,15 @@ class App extends Component {
             <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={() => { this.switchNameHandler('Maximillian') }} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
             <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
           </div>
-          : null}
+      )
+    }
+    return (
+      <div className="App">
+        <p>Hello, Lets start working in React!!</p>
+
+        {/* here we called the bind and passed the reference */}
+        <button onClick={this.togglePersonsHandler}>Toggle Person</button>
+        { Persons}
       </div>
     );
   }
