@@ -37,9 +37,11 @@ class App extends Component {
     return (
       <div className="App">
         <p>Hello, Lets start working in React!!</p>
+        {/* here we called the bind and passed the reference */}
         <button onClick={this.switchNameHandler.bind(this, 'Maximillian!!!!!!!!')}>Switch Name</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={this.switchNameHandler.bind(this, 'Maximillian')} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
+        {/* here we have used arrow function and it will be executed on the click of the event and it not executing the function here */}
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={()=> {this.switchNameHandler('Maximillian')}} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
       </div>
     );
