@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import person from './Person/Person';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -33,7 +32,8 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const updatedPersons = this.state.persons;
+    //we should use slice to create copy of original array so that it will not effect the original array
+    const updatedPersons = this.state.persons.slice();
     updatedPersons.splice(personIndex , 1);
     this.setState({persons : updatedPersons})
   }
