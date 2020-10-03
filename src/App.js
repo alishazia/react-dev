@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import person from './Person/Person';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -31,22 +32,24 @@ class App extends Component {
     })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: "shazia", age: "24" },
-        { name: event.target.value, age: "25" },
-        { name: "najar", age: "27" },
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    const updatedPersons = this.state.persons;
+    updatedPersons.splice(personIndex , 1);
+    this.setState({persons : updatedPersons})
   }
   render() {
     let Persons = null;
-    if (this.state.showPersons){
+    if (this.state.showPersons) {
       Persons = (
-           this.state.persons.map(person =>{
-             return < Person name={person.name} age={person.age} />
-           })
+        <div>
+          {this.state.persons.map((person, index) => {
+            return < Person 
+            name={person.name} age={person.age} 
+            click={() => { this.deletePersonHandler(index) }}
+             />
+          })
+          }
+        </div>
       )
     }
     return (
@@ -59,6 +62,6 @@ class App extends Component {
       </div>
     );
   }
-} 
+}
 
 export default App;
