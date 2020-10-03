@@ -44,13 +44,9 @@ class App extends Component {
     let Persons = null;
     if (this.state.showPersons){
       Persons = (
-          <div>
-            <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-
-            {/* here we have used arrow function and it will be executed on the click of the event and it not executing the function here */}
-            <Person name={this.state.persons[1].name} age={this.state.persons[1].age} click={() => { this.switchNameHandler('Maximillian') }} changed={this.nameChangedHandler}>My Hobbies : Cycling</Person>
-            <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-          </div>
+           this.state.persons.map(person =>{
+             return < Person name={person.name} age={person.age} />
+           })
       )
     }
     return (
