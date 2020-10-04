@@ -5,9 +5,9 @@ import Person from './Person/Person'
 class App extends Component {
   state = {
     persons: [
-      { id:"sh123", name: "shazia", age: "24" },
-      { id:"sh2323", name: "ali", age: "25" },
-      { id:"sh23123", name: "najar", age: "26" },
+      { id: "sh123", name: "shazia", age: "24" },
+      { id: "sh2323", name: "ali", age: "25" },
+      { id: "sh23123", name: "najar", age: "26" },
     ],
     showPersons: false
   }
@@ -30,12 +30,27 @@ class App extends Component {
       showPersons: !doesShow
     })
   }
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    console.log(personIndex)
+    const person = { ...this.state.persons[personIndex] };
+    console.log(person)
+    person.name = event.target.value;
+    // now we have to update the Array
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({
+      persons: persons
+    })
 
+  }
   deletePersonHandler = (personIndex) => {
     //we should use slice to create copy of original array so that it will not effect the original array
     const updatedPersons = this.state.persons.slice();
-    updatedPersons.splice(personIndex , 1);
-    this.setState({persons : updatedPersons})
+    updatedPersons.splice(personIndex, 1);
+    this.setState({ persons: updatedPersons })
   }
   render() {
     let Persons = null;
@@ -43,12 +58,13 @@ class App extends Component {
       Persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return < Person 
-            name={person.name} age={person.age} 
-            // Unique key for every list to update v dom
-            key={person.id}
-            click={() => { this.deletePersonHandler(index) }}
-             />
+            return < Person
+              name={person.name} age={person.age}
+              // Unique key for every list to update v dom
+              key={person.id}
+              click={() => { this.deletePersonHandler(index) }}
+              changed={(event) => { this.nameChangedHandler(event, person.id) }}
+            />
           })
           }
         </div>
@@ -57,7 +73,6 @@ class App extends Component {
     return (
       <div className="App">
         <p>Hello, Lets start working in React!!</p>
-
         {/* here we called the bind and passed the reference */}
         <button onClick={this.togglePersonsHandler}>Toggle Person</button>
         { Persons}
