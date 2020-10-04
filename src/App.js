@@ -53,6 +53,14 @@ class App extends Component {
     this.setState({ persons: updatedPersons })
   }
   render() {
+    const style = {
+      backgroundColor : 'green',
+      color:'white',
+      font : 'inherit',
+      border :'1px solid blue' ,
+      padding:'8px',
+      cursor : 'pointer'
+    }
     let Persons = null;
     if (this.state.showPersons) {
       Persons = (
@@ -68,13 +76,14 @@ class App extends Component {
           })
           }
         </div>
-      )
+      );
+      style.backgroundColor = 'red';
     }
     return (
       <div className="App">
         <p>Hello, Lets start working in React!!</p>
         {/* here we called the bind and passed the reference */}
-        <button onClick={this.togglePersonsHandler}>Toggle Person</button>
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle Person</button>
         { Persons}
       </div>
     );
