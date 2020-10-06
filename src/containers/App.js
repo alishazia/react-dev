@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
+import Personss from '../components/Persons/Persons';
+import Cockpits from '../components/Cockpits/Cockpits';
 
 class App extends Component {
   state = {
@@ -35,9 +35,7 @@ class App extends Component {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
-    console.log(personIndex)
     const person = { ...this.state.persons[personIndex] };
-    console.log(person)
     person.name = event.target.value;
     // now we have to update the Array
     const persons = [...this.state.persons];
@@ -54,58 +52,29 @@ class App extends Component {
     this.setState({ persons: updatedPersons })
   }
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'red',
-        color: 'black'
-      }
-    }
     let Persons = null;
     if (this.state.showPersons) {
       Persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return < Person
-              name={person.name} age={person.age}
-              // Unique key for every list to update v dom
-              key={person.id}
-              click={() => { this.deletePersonHandler(index) }}
-              changed={(event) => { this.nameChangedHandler(event, person.id) }}
-            />
-          })
-          }
+          <Personss
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler} />
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+
     }
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('red')
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold')
-    }
+    
     return (
-      <StyleRoot>
         <div className="App">
-          <p className={classes.join(' ')}>Hello, Lets start working in React!!</p>
-          {/* here we called the bind and passed the reference */}
-          <button style={style} onClick={this.togglePersonsHandler}>Toggle Person</button>
+          <Cockpits 
+           showPersons={this.state.persons}
+           persons={this.state.persons}
+           clicked={this.togglePersonsHandler} />
           {Persons}
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
