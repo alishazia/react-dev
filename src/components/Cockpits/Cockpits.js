@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Cockpits.css';
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
+
+    useEffect(() => {
+        toggleBtnRef.current.click();
+    }, []);
+
     const style = {
         backgroundColor: 'green',
         color: 'white',
@@ -10,7 +16,7 @@ const cockpit = (props) => {
         padding: '8px',
         cursor: 'pointer',
         ':hover': {
-            backgroundColor: 'red',     
+            backgroundColor: 'red',
             color: 'black'
         }
     }
@@ -34,9 +40,9 @@ const cockpit = (props) => {
             <p className={classes.join(' ')}>Hello, Lets start working in React!!</p>
             <p >{props.title}</p>
             {/* here we called the bind and passed the reference */}
-            <button style={style} onClick={props.clicked}>Toggle Person</button>
+            <button ref={toggleBtnRef} style={style} onClick={props.clicked}>Toggle Person</button>
         </div>
     )
 }
 
-export default cockpit;
+export default Cockpit;
