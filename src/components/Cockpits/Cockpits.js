@@ -41,6 +41,7 @@ const Cockpit = (props) => {
             <p >{props.title}</p>
             {/* here we called the bind and passed the reference */}
             <button ref={toggleBtnRef} style={style} onClick={props.clicked}>Toggle Person</button>
+            <button onClick={props.login}>Login In</button>
         </div>
     )
 }

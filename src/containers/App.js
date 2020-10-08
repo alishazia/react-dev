@@ -11,7 +11,8 @@ class App extends Component {
       { id: "sh23123", name: "najar", age: "26" },
     ],
     showPersons: false,
-    changedCounter: 0
+    changedCounter: 0,
+    authenticated : false
   }
   switchNameHandler = (newName) => {
     // we should directly change the state here
@@ -55,6 +56,11 @@ class App extends Component {
     updatedPersons.splice(personIndex, 1);
     this.setState({ persons: updatedPersons })
   }
+  loginHandler = ()=>{
+    this.setState({
+      authenticated : true
+    });
+  }
   render() {
     let Persons = null;
     if (this.state.showPersons) {
@@ -63,7 +69,8 @@ class App extends Component {
           <Personss
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />
+            changed={this.nameChangedHandler} 
+            isAuthenticated ={this.state.authenticated} />
         </div>
       );
 
@@ -75,7 +82,9 @@ class App extends Component {
           title={this.props.appTitle}
           showPersons={this.state.persons}
           persons={this.state.persons}
-          clicked={this.togglePersonsHandler} />
+          clicked={this.togglePersonsHandler} 
+          login={this.loginHandler}
+          />
         {Persons}
       </div>
     );
