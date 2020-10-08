@@ -2,7 +2,7 @@ import React from 'react';
 import './Cockpits.css';
 
 const cockpit = (props) => {
-    let style = {
+    const style = {
         backgroundColor: 'green',
         color: 'white',
         font: 'inherit',
@@ -10,7 +10,7 @@ const cockpit = (props) => {
         padding: '8px',
         cursor: 'pointer',
         ':hover': {
-            backgroundColor: 'red',
+            backgroundColor: 'red',     
             color: 'black'
         }
     }
@@ -32,6 +32,7 @@ const cockpit = (props) => {
     return (
         <div>
             <p className={classes.join(' ')}>Hello, Lets start working in React!!</p>
+            <p >{props.title}</p>
             {/* here we called the bind and passed the reference */}
             <button style={style} onClick={props.clicked}>Toggle Person</button>
         </div>

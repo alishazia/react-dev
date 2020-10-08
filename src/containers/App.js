@@ -10,7 +10,8 @@ class App extends Component {
       { id: "sh2323", name: "ali", age: "25" },
       { id: "sh23123", name: "najar", age: "26" },
     ],
-    showPersons: false
+    showPersons: false,
+    changedCounter: 0
   }
   switchNameHandler = (newName) => {
     // we should directly change the state here
@@ -40,8 +41,11 @@ class App extends Component {
     // now we have to update the Array
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({
-      persons: persons
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changedCounter: prevState.changedCounter + 1
+      }
     })
 
   }
@@ -64,15 +68,16 @@ class App extends Component {
       );
 
     }
-    
+
     return (
-        <div className="App">
-          <Cockpits 
-           showPersons={this.state.persons}
-           persons={this.state.persons}
-           clicked={this.togglePersonsHandler} />
-          {Persons}
-        </div>
+      <div className="App">
+        <Cockpits
+          title={this.props.appTitle}
+          showPersons={this.state.persons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
+        {Persons}
+      </div>
     );
   }
 }
