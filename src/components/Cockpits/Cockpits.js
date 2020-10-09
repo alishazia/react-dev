@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import AuthContext from '../../context/auth-context';
 import './Cockpits.css';
 
 const Cockpit = (props) => {
@@ -41,7 +42,7 @@ const Cockpit = (props) => {
             <p >{props.title}</p>
             {/* here we called the bind and passed the reference */}
             <button ref={toggleBtnRef} style={style} onClick={props.clicked}>Toggle Person</button>
-            <button onClick={props.login}>Login In</button>
+            <AuthContext.Consumer>{context => <button onClick={context.login}>Login In</button>}</AuthContext.Consumer>
         </div>
     )
 }
